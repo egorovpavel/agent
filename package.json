@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha tests"
+    "test": "sudo mocha -R spec tests"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "dnode": "^1.2.0"
   },
   "devDependencies": {
-    "mocha": "^1.18.2"
+    "mocha": "^1.18.2",
+    "should": "^3.2.0-beta1"
   }
 }
