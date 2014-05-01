@@ -1,29 +1,30 @@
 {
-  "name": "pool",
-  "version": "0.0.0",
-  "description": "workers pool",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "sudo mocha -R spec tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/egorovpavel/pool.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/egorovpavel/pool/issues"
-  },
-  "homepage": "https://github.com/egorovpavel/pool",
-  "dependencies": {
-    "dnode": "^1.2.0"
-  },
-  "devDependencies": {
-    "mocha": "^1.18.2",
-    "should": "^3.2.0-beta1"
-  }
+    "name": "pool",
+    "version": "0.0.0",
+    "description": "workers pool",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "sudo mocha -R spec tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/egorovpavel/pool.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/egorovpavel/pool/issues"
+    },
+    "homepage": "https://github.com/egorovpavel/pool",
+    "dependencies": {
+        "dnode": "^1.2.0",
+        "winston": "^0.7.3"
+    },
+    "devDependencies": {
+        "mocha": "^1.18.2",
+        "should": "^3.2.0-beta1"
+    }
 }

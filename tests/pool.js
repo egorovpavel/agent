@@ -1,15 +1,16 @@
 "use strict";
 
-var mocha = require('mocha');
-var should = require('should');
+require('mocha');
+require('should');
 var dnode = require('dnode');
 var os = require('os');
+var Logger = require('winston');
 var Pool = require('../lib/pool.js');
 
 describe('Pool', function() {
 	describe('Worker connection', function(done, fail) {
 		it('should accept connection from n workers', function(done, fail) {
-			var pool = new Pool(3000);
+            var pool = new Pool(3000, Logger);
 			var numWorkers = 0;
 			pool.start();
 
@@ -52,7 +53,7 @@ describe('Pool', function() {
 
 	describe('Workers status', function(done, fail) {
 		it('should report workers status', function(done, fail) {
-			var pool = new Pool(3000);
+            var pool = new Pool(3000, Logger);
 			pool.start();
 			pool.onAccept(function() {
 				var status = pool.getStatus();
