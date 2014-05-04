@@ -34,7 +34,7 @@ describe('Pool', function() {
 
             var closedMsg = function(){
                 console.log("closed");
-            }
+            };
 
 			pool.onAccept(function() {
 				if (++numWorkers == 2) {
