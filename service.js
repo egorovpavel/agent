@@ -10,10 +10,13 @@ var item = {
     id: 12345,
     config: {
         language: "JS",
-        timeout: 5000
+        timeout: 50000
     },
     payload: {
         commands: [
+            "sudo add-apt-repository ppa:fkrull/deadsnakes -y",
+            "sudo apt-get update -y",
+            "sudo apt-get install python2.7 -y",
             "cd /root",
             "git clone https://github.com/egorovpavel/pool.git pool",
             "cd pool",
