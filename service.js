@@ -1,38 +1,33 @@
 var Pool = require('./lib/pool.js');
 var Logger = require('winston');
+var thoonk = require('thoonk').createClient();
+var Job = require('thoonk-jobs');
+var async = require('async');
 
 Logger.setLevels({debug: 0, info: 1, silly: 2, warn: 3, error: 4});
 Logger.addColors({debug: 'green', info: 'cyan', silly: 'magenta', warn: 'yellow', error: 'red'});
 Logger.remove(Logger.transports.Console);
 Logger.add(Logger.transports.Console, { level: 'warn', colorize: true });
 
-var item = {
-    id: 12345,
-    config: {
-        language: "JS",
-        timeout: 50000
-    },
-    payload: {
-        commands: [
-            "sudo add-apt-repository ppa:fkrull/deadsnakes -y",
-            "sudo apt-get update -y",
-            "sudo apt-get install python2.7 -y",
-            "cd /root",
-            "git clone https://github.com/egorovpavel/pool.git pool",
-            "cd pool",
-            "npm install mocha -g",
-            "npm install",
-            "npm test"
-        ]
-    }
-};
 var pool = new Pool(3000, Logger);
-pool.onAccept(function () {
-    console.log("connected");
-    item.id = Math.round(Math.random() * 1000);
-    pool.exec(item, function (result) {
-        console.log(result);
-    })
+thoonk.registerObject('Job', Job, function () {
+    var jobWorker = thoonk.objects.Job('buildQueue');
+    async.forever(function (next) {
+        jobWorker.get(0, function (err, item, id) {
+            item = JSON.parse(item);
+            pool.exec(item, function (result) {
+                if (!result) {
+                    jobWorker.cancel(id, function (err) {
+                        next();
+                    });
+                } else {
+                    jobWorker.finish(id, result, function (err) {
+                        next();
+                    });
+                }
+            });
+        });
+    });
 });
 pool.onStop(function () {
     process.exit(1);
