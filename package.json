@@ -22,6 +22,7 @@
     "dependencies": {
         "async": "^0.8.0",
         "dnode": "1.2.0",
+        "redis": "^0.10.3",
         "thoonk": "^1.0.0",
         "thoonk-jobs": "1.0.0",
         "underscore": "1.6.0",
