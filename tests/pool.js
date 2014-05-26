@@ -21,7 +21,7 @@ describe('Pool', function() {
                 connection.on('ready', function() {
                     remote.join('127.0.0.1', function(result) {});
                 });
-            });
+            }, {weak: false});
 
             var clientTwo = dnode(function(remote, connection) {
                 this.health = function(callback) {
@@ -30,7 +30,7 @@ describe('Pool', function() {
                 connection.on('ready', function() {
                     remote.join('127.0.0.2', function(result) {});
                 });
-            });
+            }, {weak: false});
 
             var closedMsg = function(){
                 console.log("closed");
@@ -68,7 +68,7 @@ describe('Pool', function() {
 				connection.on('ready', function() {
 					remote.join('127.0.0.1', function(result) {});
 				});
-			});
+            }, {weak: false});
             client.connect(3000);
 		})
 	})
